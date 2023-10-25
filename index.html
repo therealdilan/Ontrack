@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTMX/Go</title>
+    <title>Tasks</title>
+    <style>
+        .strikethrough {
+            text-decoration: line-through;
+        }
+    </style>
 </head>
 <body>
-    <h1>HTMX/Go</h1>
+
+    {{ range .Tasks }}
+
+        {{if .State}}
+
+            <p class="strikethrough">{{ .Content }}</p>
+
+        {{else}}
+
+            <p>{{ .Content }}</p>
+
+        {{end}}
+
+    {{ end }}
+
+    
 </body>
 </html>
