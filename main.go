@@ -15,9 +15,8 @@ type task struct {
 func main() {
 	fmt.Println("Server Working")
 
-	h1 := func(w http.ResponseWriter, r *http.Request) {
+	pageLoad := func(w http.ResponseWriter, r *http.Request) {
 		htmlTemplate := template.Must(template.ParseFiles("index.html"))
-		htmlTemplate.Execute(w, nil)
 
 		todoList := map[string][]task{
 			"Tasks": {
@@ -29,7 +28,14 @@ func main() {
 		htmlTemplate.Execute(w, todoList)
 	}
 
-	http.HandleFunc("/", h1)
+	addTask := func(w http.ResponseWriter, r *http.Request) {
+		log.Print(r.Header.Get("HX-Request"))
+	}
+
+	http.HandleFunc("/", pageLoad)
+	http.HandleFunc("/add-task", addTask)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
+
+//go run ./main.go
