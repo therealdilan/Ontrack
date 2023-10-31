@@ -14,17 +14,16 @@
 
             {{ range .Tasks }}
 
-            <div class="m-4 mt-4">
-                <p class="text-2xl">{{ .Content }}</p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Done</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
-            </div>
+                {{ block "taskItem" .}}
 
-            <div class="m-4 mt-4">
-                <p class="text-2xl">{{ .Content }}</p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Done</button>
-                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
-            </div>
+                <div class="m-4 mt-4">
+                    <p {{ if .State }} class="text-2xl line-through" {{ else }} class="text-2xl" {{end}}>{{ .Content }}</p>
+                        <button hx-post="/task-done" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Done</button>          
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
+
+                </div>
+            
+                {{ end }}
 
             {{ end }}
 
