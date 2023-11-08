@@ -13,32 +13,34 @@ type task struct {
 	ID      int
 }
 
+var taskID int = 0
+var tasks []task
+
 func main() {
-	var todoList map[string]int
-
-	fmt.Println("Server Working")
-
-	todoList := make(map[string]task{
-		"Tasks": {
-			{Content: "Some content", State: false, ID: 1},
-		},
-	})
-
-	addTask := func(w http.ResponseWriter, r *http.Request) {
-		newTask := r.PostFormValue("newTask")
-		htmlTemplate := template.Must(template.ParseFiles("index.html"))
-		htmlTemplate.ExecuteTemplate(w, "taskItem", task{Content: newTask, State: false, ID: setID()})
-
-	}
 
 	http.HandleFunc("/", pageLoad)
 	http.HandleFunc("/add-task", addTask)
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Fatal(http.ListenAndServe(":8000", nil))
+	print("Server is running on port 8000")
 }
 
-func setID() int {
-	return len(todoList) + 1
+func pageLoad(w http.ResponseWriter, r *http.Request) {
+	htmlTemplate := template.Must(template.ParseFiles("index.html"))
+	htmlTemplate.Execute(w, nil)
 }
 
-//go run ./main.go
+func addTask(w http.ResponseWriter, r *http.Request) {
+	newTask := task{
+		Content: r.FormValue("newTask"),
+		State:   false,
+		ID:      taskID,
+	}
+
+	tasks = append(tasks, newTask)
+	taskID++
+
+	htmlTemplate := template.Must(template.ParseFiles("index.html"))
+	htmlTemplate.ExecuteTemplate(w, "taskItem", newTask)
+	fmt.Println(tasks)
+}
