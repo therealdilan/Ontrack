@@ -14,8 +14,8 @@ type task struct {
 	ID      int
 }
 
-func (t task) String() string { // For Debugging, will properly display the formatted task struct
-	return fmt.Sprintf("ID: %d, Content: %s", t.ID, t.Content)
+func (t task) String() string {
+	return fmt.Sprintf("ID: %d, Content: %s, State: %t", t.ID, t.Content, t.State)
 }
 
 var taskID int = 0
@@ -26,6 +26,7 @@ func main() {
 	http.HandleFunc("/", pageLoad)
 	http.HandleFunc("/add-task", addTask)
 	http.HandleFunc("/remove-task", removeTask)
+	http.HandleFunc("/mark-task", markTask)
 
 	log.Fatal(http.ListenAndServe(":8000", nil))
 	print("Server is running on port 8000")
@@ -47,6 +48,7 @@ func addTask(w http.ResponseWriter, r *http.Request) {
 
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
 	htmlTemplate.ExecuteTemplate(w, "taskItem", newTask)
+	fmt.Println(tasks)
 }
 
 func removeTask(w http.ResponseWriter, r *http.Request) {
@@ -59,7 +61,6 @@ func removeTask(w http.ResponseWriter, r *http.Request) {
 	}
 
 	removeTaskByID(id)
-	fmt.Println(tasks)
 }
 
 func removeTaskByID(id int) {
@@ -70,4 +71,36 @@ func removeTaskByID(id int) {
 			return
 		}
 	}
+	fmt.Println(tasks)
+}
+
+func markTask(w http.ResponseWriter, r *http.Request) {
+	idParam := r.URL.Query().Get("id") // Get the ID from the URL query parameter
+	fmt.Println(idParam)
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	markTaskasDone(id, w)
+	fmt.Println(tasks)
+}
+
+func markTaskasDone(id int, w http.ResponseWriter) {
+	var taskToUpdate *task
+	for i := range tasks {
+		if tasks[i].ID == id {
+			taskToUpdate = &tasks[i]
+			break
+		}
+	}
+	if taskToUpdate == nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+	taskToUpdate.State = !taskToUpdate.State
+	htmlTemplate := template.Must(template.ParseFiles("index.html"))
+	htmlTemplate.ExecuteTemplate(w, "taskItem", taskToUpdate)
+	fmt.Println(tasks)
 }
