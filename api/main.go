@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"fmt"
@@ -20,11 +20,11 @@ func (t task) String() string { // For Debugging
 var taskID int = 0
 var tasks []task
 
-func Handler() {
+func main() {
 
 	// Every HTTP request handling
 
-	http.HandleFunc("/", pageLoad)
+	http.HandleFunc("/", Handler)
 	http.HandleFunc("/add-task", addTask)
 	http.HandleFunc("/remove-task", removeTask)
 	http.HandleFunc("/mark-task", markTask)
@@ -34,7 +34,7 @@ func Handler() {
 	http.ListenAndServe(":8000", nil)
 }
 
-func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
+func Handler(w http.ResponseWriter, r *http.Request) { // Load the main page
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
 	htmlTemplate.Execute(w, nil)
 }
