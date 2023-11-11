@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"html/template"
 	"net/http"
+	"os"
 	"strconv"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 type task struct {
@@ -31,7 +34,26 @@ func main() {
 
 	// Start the server
 
-	http.ListenAndServe(":8000", nil)
+	app := fiber.New()
+
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{
+			"message": "Hello, Railway!",
+		})
+	})
+
+	app.Listen(getPort())
+}
+
+func getPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":3000"
+	} else {
+		port = ":" + port
+	}
+
+	return port
 }
 
 func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
