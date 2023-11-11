@@ -20,16 +20,11 @@ func (t task) String() string { // For Debugging
 var taskID int = 0
 var tasks []task
 
-func PageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
+func Handler(w http.ResponseWriter, r *http.Request) { // Load the main page
+
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
 	htmlTemplate.Execute(w, nil)
-}
 
-func main() {
-
-	// Every HTTP request handling
-
-	http.HandleFunc("/", PageLoad)
 	http.HandleFunc("/add-task", addTask)
 	http.HandleFunc("/remove-task", removeTask)
 	http.HandleFunc("/mark-task", markTask)
