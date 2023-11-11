@@ -8,12 +8,13 @@ The app code is very straightforward, thanks to the simplicity of HTMX and Go (I
 - Remove tasks
 - Mark tasks as done
 
+You can use the application at: https://gotrack.fly.dev/
+
 ## Future Features
 
 Future features I plan on adding, just to test my skills and learn something, include:
 
 - Database connection, probably SQLite
-- Hosting Application w/ a backend service
 - Task Sorting
 - Task Editing
 - Grouping Tasks
