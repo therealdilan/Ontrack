@@ -65,8 +65,7 @@ func addTask(w http.ResponseWriter, r *http.Request) { // Adding a new Task
 
 func removeTask(w http.ResponseWriter, r *http.Request) {
 	idParam := r.URL.Query().Get("id") // Get the ID from the URL query parameter
-	fmt.Println(idParam)
-	id, err := strconv.Atoi(idParam) // Convert the ID to an integer
+	id, err := strconv.Atoi(idParam)   // Convert the ID to an integer
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
@@ -82,13 +81,11 @@ func removeTaskByID(id int) {
 			return
 		}
 	}
-	fmt.Println(tasks)
 }
 
 func markTask(w http.ResponseWriter, r *http.Request) {
 	idParam := r.URL.Query().Get("id") // Get the ID from the URL query parameter
-	fmt.Println(idParam)
-	id, err := strconv.Atoi(idParam) // Convert the ID to an integer
+	id, err := strconv.Atoi(idParam)   // Convert the ID to an integer
 	if err != nil {
 		http.Error(w, "Invalid ID", http.StatusBadRequest)
 		return
