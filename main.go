@@ -26,7 +26,7 @@ var tasks []task
 func main() {
 
 	// Every HTTP request handling
-	
+
 	http.HandleFunc("/add-task", addTask)
 	http.HandleFunc("/remove-task", removeTask)
 	http.HandleFunc("/mark-task", markTask)
@@ -42,6 +42,8 @@ func main() {
 func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
 	htmlTemplate.Execute(w, nil)
+
+	fmt.Fprintf(w, "Hello World from Go!")
 }
 
 func addTask(w http.ResponseWriter, r *http.Request) { // Adding a new Task
