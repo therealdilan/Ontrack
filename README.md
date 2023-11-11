@@ -6,7 +6,8 @@ The app code is very straightforward, thanks to the simplicity of HTMX and Go (I
 
 - Add tasks
 - Remove tasks
-- Mark tasks as done 
+- Mark tasks as done
+- Deployed on Vercel kinda (It's so annoying)
 
 ## Future Features
 
