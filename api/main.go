@@ -37,8 +37,6 @@ func main() {
 func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
 	htmlTemplate.Execute(w, nil)
-
-	fmt.Fprintf(w, "Hello World from Go!")
 }
 
 func addTask(w http.ResponseWriter, r *http.Request) { // Adding a new Task
