@@ -1,8 +1,8 @@
 # goTrack
 
-Go Track is a basic Todo app written with a Go Server and Backend, and HTMX + Tailwind for the frontend. 
+goTrack is a basic Todo app written with a Go Server and Backend, and HTMX + Tailwind for the frontend. 
 
-The app code is very straightforward, thanks to the simplicity of HTMX and Go (I love this combo so much). Here's some features (pretty self explanatory):
+The app code is very straightforward, thanks to the simplicity of HTMX and Go. Here's some features (pretty self explanatory):
 
 - Add tasks
 - Remove tasks
