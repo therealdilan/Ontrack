@@ -6,8 +6,6 @@ import (
 	"log"
 	"net/http"
 	"strconv"
-
-	"github.com/gorilla/mux"
 )
 
 type task struct {
@@ -27,16 +25,14 @@ func main() {
 
 	// Every HTTP request handling
 
+	http.HandleFunc("/", pageLoad)
 	http.HandleFunc("/add-task", addTask)
 	http.HandleFunc("/remove-task", removeTask)
 	http.HandleFunc("/mark-task", markTask)
 
 	// Start the server
 
-	r := mux.NewRouter()
-	r.HandleFunc("/", pageLoad).Methods("GET")
-
-	log.Fatal(http.ListenAndServe(":8000", r))
+	log.Fatal(http.ListenAndServe(":8000", nil))
 }
 
 func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
