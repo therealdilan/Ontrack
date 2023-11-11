@@ -3,11 +3,10 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"net/http"
 	"os"
 	"strconv"
-
-	"github.com/gofiber/fiber/v2"
 )
 
 type task struct {
@@ -32,33 +31,23 @@ func main() {
 	http.HandleFunc("/remove-task", removeTask)
 	http.HandleFunc("/mark-task", markTask)
 
-	// Start the server
-
-	app := fiber.New()
-
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{
-			"message": "Hello, Railway!",
-		})
-	})
-
-	app.Listen(getPort())
-}
-
-func getPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = ":3000"
-	} else {
-		port = ":" + port
+		port = "8080"
 	}
 
-	return port
+	log.Println("listening on", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
+
 }
 
 func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
+	data := map[string]string{
+		"Region": os.Getenv("FLY_REGION"),
+	}
+
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
-	htmlTemplate.Execute(w, nil)
+	htmlTemplate.Execute(w, data)
 }
 
 func addTask(w http.ResponseWriter, r *http.Request) { // Adding a new Task
