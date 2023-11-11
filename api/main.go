@@ -20,7 +20,7 @@ func (t task) String() string { // For Debugging
 var taskID int = 0
 var tasks []task
 
-func main() {
+func Handler() {
 
 	// Every HTTP request handling
 
