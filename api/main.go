@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strconv"
 )
@@ -32,7 +31,7 @@ func main() {
 
 	// Start the server
 
-	log.Fatal(http.ListenAndServe(":8000", nil))
+	http.ListenAndServe(":8000", nil)
 }
 
 func pageLoad(w http.ResponseWriter, r *http.Request) { // Load the main page
