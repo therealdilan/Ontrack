@@ -14,8 +14,10 @@ You can use the application at: https://gotrack.fly.dev/
 
 Future features I plan on adding, just to test my skills and learn something, include:
 
-- Database connection, probably SQLite
+- Database connection
 - Task Sorting
 - Task Editing
 - Grouping Tasks
 - ChatGPT Integration
+- Data transfer over HTTPS
+- Input Validation/Sanitation
