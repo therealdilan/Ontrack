@@ -1,36 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.6"
+        integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+        crossorigin="anonymous"></script>
 
     <title>Tasks</title>
+    <style>
+        .fade-me-out.htmx-swapping {
+            opacity: 0;
+            transition: opacity 250ms ease-out;
+        }
+
+        div[name=fade-me-in].htmx-added {
+            opacity: 0;
+        }
+
+        div[name=fade-me-in] {
+            opacity: 1;
+            transition: opacity 250ms ease-in;
+        }
+    </style>
 </head>
+
 <body class="m-4">
-        <div id="tasksList">
+    <div id="tasksList">
 
-            {{ range .Tasks }}
+        {{ range .Tasks }}
 
-                {{ block "taskItem" .}}
+        {{ block "taskItem" .}}
 
-                <div class="m-4 mt-4" id="task{{ .ID }}">
-                    <p {{ if .State }} class="text-2xl line-through" {{ else }} class="text-2xl" {{end}}>{{ .Content }}</p>
-                        <button hx-post="/mark-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="outerHTML" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{if .State }} Mark as Undone {{ else }} Mark as Done {{ end }}</button>          
-                        <button hx-delete="/remove-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="innerHTML" type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
-                </div>
-            
-                {{ end }}
+        <div class="m-4 mt-4 fade-me-out maxHeight" name="fade-me-in" id="task{{ .ID }}">
+            <p {{ if .State }} class="text-2xl line-through" {{ else }} class="text-2xl" {{end}}>{{ .Content }}</p>
+            <button hx-post="/mark-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="outerHTML" type="submit"
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{if .State }} Mark as
+                Undone {{ else }} Mark as Done {{ end }}</button>
+            <button hx-delete="/remove-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="outerHTML swap:250ms"
+                type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
+        </div>
 
-            {{ end }}
+        {{ end }}
 
-        </div> 
+        {{ end }}
 
-    <form class="m-4 mt-4" hx-post="/add-task" hx-target="#tasksList" hx-swap="beforeend">
-        <input class="border border-gray-400 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" type="text" name="newTask" placeholder="Enter your task">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit" id="addnewtask">Add</button>
+    </div>
+
+    <form class="m-4 mt-4" hx-post="/add-task" hx-target="#tasksList" hx-swap="beforeend settle:250ms">
+        <input
+            class="border border-gray-400 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            type="text" name="newTask" placeholder="Enter your task">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit"
+            id="addnewtask">Add</button>
     </form>
-    
+
 </body>
+
 </html>
