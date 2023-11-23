@@ -7,6 +7,7 @@ The app code is very straightforward, thanks to the simplicity of HTMX and Go. H
 - Add tasks
 - Remove tasks
 - Mark tasks as done
+- Task Editing
 
 You can use the application at: https://gotrack.fly.dev/
 
@@ -16,7 +17,6 @@ Future features I plan on adding, just to test my skills and learn something, in
 
 - Database connection
 - Task Sorting
-- Task Editing
 - Grouping Tasks
 - ChatGPT Integration
 - Data transfer over HTTPS

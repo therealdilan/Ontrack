@@ -9,11 +9,11 @@
         integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
         crossorigin="anonymous"></script>
 
-    <title>Tasks</title>
+    <title>goTrack</title>
     <style>
         .fade-me-out.htmx-swapping {
             opacity: 0;
-            transition: opacity 250ms ease-out;
+            transition: opacity 200ms ease-out;
         }
 
         div[name=fade-me-in].htmx-added {
@@ -22,7 +22,7 @@
 
         div[name=fade-me-in] {
             opacity: 1;
-            transition: opacity 250ms ease-in;
+            transition: opacity 200ms ease-in;
         }
     </style>
 </head>
@@ -31,7 +31,7 @@
 
 <h1 class="text-2xl font-bold">goTrack - HTMX and Golang Todo List</h1>
 
-<form class="mt-4 flex justify-between" hx-post="/add-task" hx-target="#tasksList" hx-swap="beforeend settle:250ms">
+<form class="mt-4 flex justify-between" hx-post="/add-task" hx-target="#tasksList" hx-swap="beforeend settle:200ms">
     <input
             class="flex-grow border border-gray-400 rounded py-2 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             type="text" name="newTask" placeholder="Enter your task">
@@ -45,7 +45,7 @@
 
         {{ block "taskItem" .}}
 
-        <div class="rounded-md p-4 mt-4 fade-me-out bg-slate-300 flex justify-between" name="fade-me-in" id="task{{ .ID }}">
+        <div class="rounded-md p-4 mt-4 bg-slate-300 flex justify-between" name="fade-me-in" id="task{{ .ID }}">
             <input name="taskField" class="text-2xl bg-transparent flex-grow outline-none {{ if .State }}line-through{{ end }}" {{ if .State }}disabled{{ end }} value="{{ .Content }}"
                    hx-trigger="input changed delay:50ms, update-task"
                    hx-post="/update-task?id={{ .ID }}"
@@ -54,7 +54,7 @@
                 <button hx-post="/mark-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="outerHTML" type="submit"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{if .State }} Mark as
                     Undone {{ else }} Mark as Done {{ end }}</button>
-                <button hx-delete="/remove-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="outerHTML swap:250ms"
+                <button hx-delete="/remove-task?id={{ .ID }}" hx-target="#task{{ .ID }}" hx-swap="outerHTML swap:200ms"
                     type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Remove</button>
             </div>
         </div>
