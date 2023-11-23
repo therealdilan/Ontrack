@@ -30,6 +30,7 @@ func main() {
 	http.HandleFunc("/add-task", addTask)
 	http.HandleFunc("/remove-task", removeTask)
 	http.HandleFunc("/mark-task", markTask)
+	http.HandleFunc("/update-task", getUpdatedTask)
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -108,6 +109,37 @@ func markTaskasDone(id int, w http.ResponseWriter) {
 	}
 
 	taskToUpdate.State = !taskToUpdate.State
+	htmlTemplate := template.Must(template.ParseFiles("index.html"))
+
+	htmlTemplate.ExecuteTemplate(w, "taskItem", taskToUpdate) // Once you get the task, send the task (with new State)
+}
+
+func getUpdatedTask(w http.ResponseWriter, r *http.Request) {
+	content := r.FormValue("taskField") // Get the new content from the task
+	idParam := r.URL.Query().Get("id")  // Get the ID from the URL query parameter
+	id, err := strconv.Atoi(idParam)    // Convert the ID to an integer
+	if err != nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	updateTask(id, w, content) // Sending the new HTML with the changed task
+}
+
+func updateTask(id int, w http.ResponseWriter, newText string) {
+	var taskToUpdate *task
+	for i := range tasks { // Find the task with the given ID
+		if tasks[i].ID == id {
+			taskToUpdate = &tasks[i]
+			break
+		}
+	}
+	if taskToUpdate == nil {
+		http.Error(w, "Invalid ID", http.StatusBadRequest)
+		return
+	}
+
+	taskToUpdate.Content = newText
 	htmlTemplate := template.Must(template.ParseFiles("index.html"))
 
 	htmlTemplate.ExecuteTemplate(w, "taskItem", taskToUpdate) // Once you get the task, send the task (with new State)
