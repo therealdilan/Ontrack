@@ -1,23 +1,3 @@
-# goTrack
+# onTrack
 
-goTrack is a basic Todo app written with a Go Server and Backend, and HTMX + Tailwind for the frontend. 
-
-The app code is very straightforward, thanks to the simplicity of HTMX and Go. Here's some features (pretty self explanatory):
-
-- Add tasks
-- Remove tasks
-- Mark tasks as done
-- Task Editing
-
-You can use the application at: https://gotrack.fly.dev/
-
-## Future Features
-
-Future features I plan on adding, just to test my skills and learn something, include:
-
-- Database connection
-- Task Sorting
-- Grouping Tasks
-- ChatGPT Integration
-- Data transfer over HTTPS
-- Input Validation/Sanitation
+A todo app made with Golang, Svelte and HTMX
