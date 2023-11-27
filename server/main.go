@@ -1,9 +1,12 @@
 package main
 
 import (
-	"github.com/therealdilan/ontrack/app"
+	"html/template"
+
 )
 
 func main() {
-	app.ExecuteTemplate()
+	e := echo.New()
+
+	e
 }

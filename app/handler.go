@@ -1,22 +1,16 @@
 package app
 
 import (
-	"fmt"
-	"os"
-	"text/template"
+	"html/template"
+	"net/http"
 )
 
-type data struct {
-	name string
+var tmpl *template.Template
+
+func ReturnTemplate() {
+	tmpl, _ = template.ParseFiles("templates.index.html")
 }
 
-func ExecuteTemplate() {
-	p := data{name: "dilan"}
-
-	t, error := template.New("views/templates/index.html").ParseFiles("views/templates")
-	if error != nil {
-		fmt.Print(error)
-	}
-
-	t.Execute(os.Stdout, p)
+func HandleTemplate(w http.ResponseWriter, r *http.Request) {
+	tmpl.Execute(w, nil)
 }
