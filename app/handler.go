@@ -13,7 +13,7 @@ type data struct {
 func ExecuteTemplate() {
 	p := data{name: "dilan"}
 
-	t, error := template.New("templates/index.html").ParseFiles("templates")
+	t, error := template.New("views/templates/index.html").ParseFiles("views/templates")
 	if error != nil {
 		fmt.Print(error)
 	}
