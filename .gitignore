@@ -3,3 +3,4 @@ OLD/
 app/node_modules
 .DS_Store
 tmp
+.air.toml

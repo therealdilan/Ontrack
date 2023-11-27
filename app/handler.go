@@ -23,8 +23,6 @@ func ReturnTemplate() {
 
 func HandleTemplate(w http.ResponseWriter, r *http.Request) {
 	name = "another name"
-	fmt.Println(name)
 	tmpl.Execute(w, name)
 	fmt.Println("what about this ?")
-
 }
