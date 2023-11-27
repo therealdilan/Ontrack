@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	app.ReturnTemplate()
-	http.HandleFunc("/", app.HandleTemplate)
-	http.ListenAndServe(":8000", nil)
+	http.HandleFunc("/", app.HandleTemplate("lol.html"))
+	http.ListenAndServe(":8080", nil)
 }

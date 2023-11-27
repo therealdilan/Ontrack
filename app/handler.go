@@ -1,28 +1,23 @@
 package app
 
 import (
-	"fmt"
-	"html/template"
 	"net/http"
-	"os"
+	"text/template"
 )
 
-var name string
+func HandleTemplate(route string) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
 
-var tmpl *template.Template
+		t, err := template.ParseFiles("app/views/templates/" + route)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 
-func ReturnTemplate() {
-	tmpl, _ = template.ParseFiles("app/views/templates/index.html")
-	currentDir, err := os.Getwd()
-	if err != nil {
-		fmt.Println(err)
+		err = t.Execute(w, nil)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
 	}
-	fmt.Println("Current Working Directory:", currentDir)
-
-}
-
-func HandleTemplate(w http.ResponseWriter, r *http.Request) {
-	name = "another name"
-	tmpl.Execute(w, name)
-	fmt.Println("what about this ?")
 }
