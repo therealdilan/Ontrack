@@ -7,6 +7,8 @@ import (
 	"os"
 )
 
+var name string
+
 var tmpl *template.Template
 
 func ReturnTemplate() {
@@ -20,5 +22,9 @@ func ReturnTemplate() {
 }
 
 func HandleTemplate(w http.ResponseWriter, r *http.Request) {
-	tmpl.Execute(w, nil)
+	name = "another name"
+	fmt.Println(name)
+	tmpl.Execute(w, name)
+	fmt.Println("what about this ?")
+
 }
