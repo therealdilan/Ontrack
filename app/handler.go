@@ -10,7 +10,7 @@ import (
 var tmpl *template.Template
 
 func ReturnTemplate() {
-	tmpl, _ = template.ParseFiles("app/views/templates/index.html")
+	tmpl, _ = template.ParseFiles("../app/views/templates/index.html")
 	currentDir, err := os.Getwd()
 	if err != nil {
 		fmt.Println(err)
