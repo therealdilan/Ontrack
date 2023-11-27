@@ -10,7 +10,7 @@ type data struct {
 	name string
 }
 
-func executeTemplate() {
+func ExecuteTemplate() {
 	p := data{name: "dilan"}
 
 	t, error := template.New("templates/index.html").ParseFiles("templates")
