@@ -8,7 +8,7 @@ import (
 var tmpl *template.Template
 
 func ReturnTemplate() {
-	tmpl, _ = template.ParseFiles("templates/index.html")
+	tmpl, _ = template.ParseFiles("views/templates/index.html")
 }
 
 func HandleTemplate(w http.ResponseWriter, r *http.Request) {
