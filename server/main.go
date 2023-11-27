@@ -1,12 +1,13 @@
 package main
 
 import (
-	"html/template"
+	"net/http"
 
+	"github.com/therealdilan/ontrack/app"
 )
 
 func main() {
-	e := echo.New()
-
-	e
+	app.ReturnTemplate()
+	http.HandleFunc("/", app.HandleTemplate)
+	http.ListenAndServe(":8000", nil)
 }
