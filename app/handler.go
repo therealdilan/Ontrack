@@ -1,16 +1,22 @@
 package app
 
 import (
+	"fmt"
 	"os"
 	"text/template"
 )
 
-func executeTemplate() {
-	t, _ := template.ParseFiles(
-		"templates/index.gohtml",
-	)
+type data struct {
+	name string
+}
 
-	t.Execute(os.Stdout, map[string]string{
-		"name": "dilan",
-	})
+func executeTemplate() {
+	p := data{name: "dilan"}
+
+	t, error := template.New("templates/index.html").ParseFiles("templates")
+	if error != nil {
+		fmt.Print(error)
+	}
+
+	t.Execute(os.Stdout, p)
 }
