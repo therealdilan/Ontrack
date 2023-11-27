@@ -1,2 +1,4 @@
-OLD
+OLD/
 .idea
+app/node_modules
+server/tmp

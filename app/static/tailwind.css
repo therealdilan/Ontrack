@@ -1,0 +1,5 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* npx tailwindcss -i ./static/tailwind.css -o ./static/styles.css --watch */
