@@ -534,13 +534,13 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.static {
-  position: static;
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 
-.bg-slate-900 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 42 / var(--tw-bg-opacity));
+.font-semibold {
+  font-weight: 600;
 }
 
 /* npx tailwindcss -i ./static/tailwind.css -o ./static/styles.css --watch */

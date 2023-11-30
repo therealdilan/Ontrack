@@ -14,10 +14,12 @@ func HandleTemplate(route string) http.HandlerFunc {
 			return
 		}
 
-		err = t.ExecuteTemplate(w, "app", nil)
-		if err != nil {
+    err = t.ExecuteTemplate(w, "app", nil)
+		
+    if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
 	}
 }
+
