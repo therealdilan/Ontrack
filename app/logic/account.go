@@ -7,6 +7,7 @@ import (
 
 	firebase "firebase.google.com/go/v4"
 	"firebase.google.com/go/v4/auth"
+  "google.golang.org/api/option"
 )
 
 var (
@@ -24,7 +25,7 @@ func InitializeFirebaseApp() (*firebase.App, error) {
   return app, nil
 }
 
-func createAccount(w http.ResponseWriter, r *http.Request) {
+func CreateAccount(w http.ResponseWriter, r *http.Request) {
     if app == nil {
       fmt.Println("Firebase app is not initialized")
     return

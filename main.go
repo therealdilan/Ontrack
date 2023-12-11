@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
-  
+  appHandler.DefineRoutes() 
+  logic.InitializeFirebaseApp()
 }
 
