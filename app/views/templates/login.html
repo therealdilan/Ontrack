@@ -1,0 +1,28 @@
+{{ define "login" }} 
+<div 
+  class="flex flex-col items-start gap-8 p-4 flex-1 self-stretch">
+  <div class="self-stretch gap-2 flex flex-col">
+    <h1 class="font-sans font-bold text-2xl">Ontrack</h1>
+    <h6>Ontrack is a free, open-source tasks app</h6>  
+  </div>
+    <form class="gap-4 flex flex-col w-96">
+      <input
+        class="px-4 py-2 border-none border-slate-900 rounded-md"
+        name="createAccountEmail"
+        placeholder="Enter your email"
+        type="email">
+      </input>
+      <input
+        class="px-4 py-2 border-none border-slate-900 rounded-md"
+        name="createAccountPassword"
+        placeholder="Enter a password"
+        type="password">
+      </input>
+      <button
+        class="px-4 py-2 bg-slate-900 text-slate-100 rounded-md"
+        hx-post="/createAccount">
+        Create Account
+      </button>
+    </form>
+</div>
+{{ end }}

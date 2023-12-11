@@ -2,7 +2,10 @@
 module.exports = {
   content: ["views/templates/*.{html,js}"],
   theme: {
-    extend: {},
+    fontFamily: {
+      'sans': ['Lexend', 'sans-serif'],
+    },
+      extend: {},
   },
   plugins: [],
 };

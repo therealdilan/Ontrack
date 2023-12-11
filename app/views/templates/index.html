@@ -8,10 +8,20 @@
     <script src="/static/hmtx.min.js" type="text/javascript"></script>
     <link href="/static/styles.css" rel="stylesheet">
     <title>Ontrack</title>
+    
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700&display=swap');
+    </style>
+
 </head>
 <body>
   <div class="bg-slate-100 flex p-4 items-start gap-4 h-screen">
     {{ template "navbar" .}}
+    {{if .User.LoggedIn}}
+      {{template "content" .}}
+    {{else}}
+      {{template "login" .}}
+    {{end}}
   </div>
 </body>
 </html>
