@@ -3,6 +3,7 @@ package appHandler
 import (
 	"net/http"
 	"text/template"
+  "github.com/therealdilan/ontrack/app/logic"
 )
 
 func HandleTemplate(route string) http.HandlerFunc {
@@ -19,5 +20,6 @@ func HandleTemplate(route string) http.HandlerFunc {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
-	}
+    logic.CheckUser(w, r)
+	}  
 }

@@ -15,10 +15,14 @@ var (
 
 func InitializeFirebaseApp() (*firebase.App, error) {
   opt := option.WithCredentialsFile("admin.firebase.json")
-  Backend, err := firebase.NewApp(context.Background(), nil, opt)
+  app, err := firebase.NewApp(context.Background(), nil, opt)
   if err != nil {
     fmt.Println("Error initializing Firebase app:", err)
   }
-  
+
+  Backend = app
+
+  fmt.Println(Backend)
+
   return Backend, nil
 }
