@@ -8,24 +8,24 @@
     <form class="gap-4 flex flex-col w-96">
       <input
         class="px-4 py-2 border-none border-slate-900 rounded-md"
-        name="createAccountEmail"
+        name="userAccountEmail"
         placeholder="Enter your email"
         type="email">
       </input>
       <input
         class="px-4 py-2 border-none border-slate-900 rounded-md"
-        name="createAccountPassword"
+        name="userAccountPassword"
         placeholder="Enter a password"
         type="password">
       </input>
       <button
         class="px-4 py-2 bg-slate-900 text-slate-100 rounded-md"
-        hx-post="/createAccount">
+        hx-post="/CreateUserAccount">
         Create Account
       </button>
       <button
         class="px-4 py-2 bg-slate-900 text-slate-100 rounded-md"
-        hx-post="/loginAccount">
+        hx-post="/LoginUserAccount">
         Login
       </button>
     </form>

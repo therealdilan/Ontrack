@@ -12,7 +12,7 @@ import (
 )
 
 var (
-  ctx = context.Background()
+  Ctx = context.Background()
   Fb *firebase.App
   Sb *supa.Client
 )

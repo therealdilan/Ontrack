@@ -1,3 +1,3 @@
 # Ontrack
 
-A todo app made with Golang, Svelte and HTMX
+A todo app made in Go with HTMX and Tailwind.
