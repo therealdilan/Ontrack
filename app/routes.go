@@ -6,8 +6,8 @@ import (
 )
 
 func DefineApp() {
-  http.HandleFunc("/createAccount", logic.CreateAccount)
-  http.HandleFunc("/loginAccount", logic.LoginAccount)
+  logic.InitializeFirebaseApp()
+  logic.InitializeSupabase()
   http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("app/static"))))
   http.HandleFunc("/", HandleTemplate("index.html"))
   // Start HTTP server

@@ -7,4 +7,6 @@ tmp
 admin.firebase.json
 *.log
 .firebaserc
-
+.env
+env.json
+ui-debug.log
