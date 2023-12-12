@@ -5,7 +5,8 @@ import (
   "github.com/therealdilan/ontrack/app/logic"
 )
 
-func DefineRoutes() {
+func DefineApp() {
+  logic.InitializeFirebaseApp()
   http.HandleFunc("/createAccount", logic.CreateAccount)
   http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("app/static"))))
   http.HandleFunc("/", HandleTemplate("index.html"))
