@@ -558,10 +558,6 @@ video {
   flex: 1 1 0%;
 }
 
-.flex-row {
-  flex-direction: row;
-}
-
 .flex-col {
   flex-direction: column;
 }
@@ -570,16 +566,16 @@ video {
   align-items: flex-start;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
 
 .gap-8 {
   gap: 2rem;
-}
-
-.gap-2 {
-  gap: 0.5rem;
 }
 
 .self-stretch {
@@ -632,18 +628,9 @@ video {
   font-family: Lexend, sans-serif;
 }
 
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
-}
-
-.font-semibold {
-  font-weight: 600;
 }
 
 .font-bold {

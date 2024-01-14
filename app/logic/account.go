@@ -1,40 +1,61 @@
-package logic 
+package logic
 
 import (
-  "fmt"
-  "net/http"
+  "context"
+	"fmt"
+	"net/http"
 
-  supa "github.com/nedpals/supabase-go"
+	firebase "firebase.google.com/go/v4"
+	"firebase.google.com/go/v4/auth"
+  "google.golang.org/api/option"
 )
 
-func CreateUserAccount(w http.ResponseWriter, r *http.Request) {
-  user, err := Sb.Auth.SignUp(Ctx, supa.UserCredentials{
-    Email:     r.FormValue("userAccountEmail"),
-    Password: r.FormValue("userAccountPassword"),
-  })
+var (
+  ctx = context.Background()
+  app *firebase.App
+)
 
+func initializeFirebaseApp() (*firebase.App, error) {
+  opt := option.WithCredentialsFile("admin.firebase.json")
+  app, err := firebase.NewApp(context.Background(), nil, opt)
   if err != nil {
-    w.Write([]byte(err.Error()))
+    fmt.Println("Error initializing Firebase app:", err)
+    return nil, err
+  }
+
+  
+  fmt.Println(app)
+
+  return app, nil
+}
+
+func createAccount(w http.ResponseWriter, r *http.Request) {
+    if app == nil {
+      fmt.Println("Firebase app is not initialized")
     return
   }
 
-  w.Write([]byte("User Created!"))
-
-  fmt.Println(user) 
-}
-
-func LoginUserAccount(w http.ResponseWriter, r *http.Request) {
-  user, err := Sb.Auth.SignIn(Ctx, supa.UserCredentials{
-    Email:     r.FormValue("userAccountEmail"),
-    Password: r.FormValue("userAccountPassword"),
-  })
+  client, err := app.Auth(ctx)
 
   if err != nil {
-    w.Write([]byte(err.Error()))
+    fmt.Println("Error creating Firebase Auth client:", err)
     return
   }
 
-  w.Write([]byte("User Logged In!"))
+  params := (&auth.UserToCreate{}).
+          Email(r.FormValue("createAccountEmail")).
+          EmailVerified(false).
+          Password("password")
 
-  fmt.Println(user)
+  user, err := client.CreateUser(ctx, params)
+
+  if err != nil {
+    fmt.Println("Error creating user:", err)
+    return
+  }
+
+  fmt.Println("Successfully created user:", user)
 }
+
+
+
