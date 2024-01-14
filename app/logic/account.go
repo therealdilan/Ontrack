@@ -1,4 +1,4 @@
-package logic
+package app
 
 import (
 	"fmt"
@@ -6,10 +6,11 @@ import (
   supa "github.com/nedpals/supabase-go"
 )
 
-func CreateAccount(w http.ResponseWriter, r *http.Request) {
-  user, err := App.Auth.SignUp(Ctx, supa.UserCredentials{
-    Email:    "example@example.com",
-    Password: "password",
+func CreateUserAccount(w http.ResponseWriter, r *http.Request) {
+  data := r.FormValue
+  user, err := Supabase.Auth.SignUp(Ctx, supa.UserCredentials{
+    Email:    data("userAccountEmail"),
+    Password: data("userAccountPassword"),
   })
 
   if err != nil {

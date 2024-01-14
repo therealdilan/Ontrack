@@ -1,4 +1,4 @@
-package logic
+package app
 
 import (
   "context"
@@ -11,7 +11,7 @@ import (
 
 var (
   Ctx = context.Background()
-  App *supa.Client
+  Supabase *supa.Client
 )
 
 func InitializeSupabase() (*supa.Client, error) {
@@ -25,9 +25,9 @@ func InitializeSupabase() (*supa.Client, error) {
 
   supabase := supa.CreateClient(SUPABASE_URL, SUPABASE_KEY)
 
-  App = supabase
+  Supabase = supabase
 
-  fmt.Println(App)
+  fmt.Println(Supabase)
 
-  return App, nil
+  return Supabase, nil
 }
