@@ -7,29 +7,12 @@ import (
 
   "github.com/joho/godotenv"
   supa "github.com/nedpals/supabase-go"
-	firebase "firebase.google.com/go/v4"
-  "google.golang.org/api/option"
 )
 
 var (
   Ctx = context.Background()
-  Fb *firebase.App
-  Sb *supa.Client
+  App *supa.Client
 )
-
-func InitializeFirebaseApp() (*firebase.App, error) {
-  opt := option.WithCredentialsFile("admin.firebase.json")
-  app, err := firebase.NewApp(context.Background(), nil, opt)
-  if err != nil {
-    fmt.Println("Error initializing Firebase app:", err)
-  }
-
-  Fb = app
-
-  fmt.Println(Fb)
-
-  return Fb, nil
-}
 
 func InitializeSupabase() (*supa.Client, error) {
   err := godotenv.Load()
@@ -42,9 +25,9 @@ func InitializeSupabase() (*supa.Client, error) {
 
   supabase := supa.CreateClient(SUPABASE_URL, SUPABASE_KEY)
 
-  Sb = supabase
+  App = supabase
 
-  fmt.Println(Sb)
+  fmt.Println(App)
 
-  return Sb, nil
+  return App, nil
 }
